@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { ThemeProvider } from "@material/core/ThemeProvider";
+import { createMuiTheme } from "@material/core/styles";
+import lightBlue from "@material/core/colors/lightBlue";
+import teal from "@material/core/colors/teal";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  theme = createMuiTheme({
+    palette: {
+      primary: lightBlue,
+      secondary: teal
+    }
+  });
+
+  render() {
+    return (
+      <div>
+        <ThemeProvider theme={this.theme}></ThemeProvider>
+      </div>
+    );
+  }
 }
 
 export default App;
