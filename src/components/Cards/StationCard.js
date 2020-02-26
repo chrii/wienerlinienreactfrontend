@@ -16,7 +16,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import { ThemeProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,64 +49,62 @@ export default function RecipeReviewCard() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Card className={classes.root}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="station" className={classes.avatar}>
-              U1
-            </Avatar>
-          }
-          action={
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          }
-          title="Reumannplatz"
-          subheader="Richtung Leopoldau"
-        />
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="Paella dish"
-          />
-        </Collapse>
-        <CardContent>
-          <Grid
-            container
-            direction="row"
-            justify="space-evenly"
-            alignItems="stretch"
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="station" className={classes.avatar}>
+            U1
+          </Avatar>
+        }
+        action={
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
           >
-            <Paper className={classes.paper} style={{ padding: 30 }}>
-              <Typography variant="h6">3</Typography>
-            </Paper>
-            <Paper className={classes.paper} style={{ padding: 30 }}>
-              <Typography variant="h6">4</Typography>
-            </Paper>
-            <Paper className={classes.paper} style={{ padding: 30 }}>
-              <Typography variant="h6">8</Typography>
-            </Paper>
-          </Grid>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon style={{ color: "green" }} />
+            <ExpandMoreIcon />
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit />
-      </Card>
-    </ThemeProvider>
+        }
+        title="Reumannplatz"
+        subheader="Richtung Leopoldau"
+      />
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardMedia
+          className={classes.media}
+          image="/static/images/cards/paella.jpg"
+          title="Paella dish"
+        />
+      </Collapse>
+      <CardContent>
+        <Grid
+          container
+          direction="row"
+          justify="space-evenly"
+          alignItems="stretch"
+        >
+          <Paper className={classes.paper} style={{ padding: 30 }}>
+            <Typography variant="h6">3</Typography>
+          </Paper>
+          <Paper className={classes.paper} style={{ padding: 30 }}>
+            <Typography variant="h6">4</Typography>
+          </Paper>
+          <Paper className={classes.paper} style={{ padding: 30 }}>
+            <Typography variant="h6">8</Typography>
+          </Paper>
+        </Grid>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon style={{ color: "green" }} />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit />
+    </Card>
   );
 }
