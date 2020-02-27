@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Layout from "./components/LandingPage/Layout";
 import Card from "./components/Cards/StationCard";
 import { Typography } from "@material-ui/core";
+import { filterLines } from "./utils/dataFilter";
 
 const URL = "http://localhost:3001";
 
@@ -44,7 +45,7 @@ class App extends Component {
 
   render() {
     if (this.state.masterData) {
-      console.log(this.state.masterData);
+      console.log(filterLines("ptMetro", "H", this.state.masterData));
     }
     return (
       <div>
