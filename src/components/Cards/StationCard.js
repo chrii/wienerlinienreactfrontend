@@ -51,7 +51,12 @@ export default function RecipeReviewCard({ data }) {
 
   return (
     <Box pt={1}>
-      <Card className={classes.root}>
+      <Card
+        className={classes.root}
+        onClick={event => {
+          console.log(event);
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar aria-label="station" className={classes.avatar}>
@@ -70,7 +75,7 @@ export default function RecipeReviewCard({ data }) {
               <ExpandMoreIcon />
             </IconButton>
           }
-          title="Reumannplatz"
+          title={data.NAME}
           subheader="Richtung Leopoldau"
         />
         <Collapse in={expanded} timeout="auto" unmountOnExit>

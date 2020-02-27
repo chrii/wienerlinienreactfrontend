@@ -1,21 +1,26 @@
 import React, { Component } from "react";
 import { Button, Box, CircularProgress } from "@material-ui/core";
 import StationCard from "./StationCard";
-import { filterLines } from "../../utils/dataFilter";
+import { filterCategorys, filterLinesByLine } from "../../utils/dataFilter";
 
 class StationCardList extends Component {
   state = {
     activeTrafficStations: []
   };
-  getTrafficStation() {
-    return filterLines("ptTram", "H", this.props.masterData);
+  getStationsByCategory() {
+    return filterCategorys("ptTram", "H", this.props.masterData);
   }
 
-  onRender() {
-    if (this.getTrafficStation().length === 0) {
+  getStationsByLine(line) {
+    return filterLinesByLine(line, this.getStationsByCategory());
+  }
+
+  onRender = () => {
+    if (this.getStationsByCategory().length === 0) {
       return <CircularProgress color="secondary" />;
     } else {
-      return this.getTrafficStation().map((item, index) => {
+      console.log();
+      return this.getStationsByLine(6).map((item, index) => {
         return (
           <StationCard
             key={item.VERKEHRSMITTEL + item.HALTESTELLEN_ID + index}
@@ -24,10 +29,10 @@ class StationCardList extends Component {
         );
       });
     }
-  }
+  };
 
   render() {
-    console.log(this.getTrafficStation());
+    console.log(this.getStationsByCategory());
     return (
       <div>
         <Box pl={10} pt={9}>

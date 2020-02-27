@@ -1,4 +1,4 @@
-export const filterLines = (strLine, way, mData) => {
+export const filterCategorys = (strLine, way, mData) => {
   const filterData = mData.filter(item => {
     if (way === "both") {
       return item.VERKEHRSMITTEL === strLine;
@@ -6,5 +6,13 @@ export const filterLines = (strLine, way, mData) => {
       return item.VERKEHRSMITTEL === strLine && item.RICHTUNG === "H";
     }
   });
+  return filterData;
+};
+
+export const filterLinesByLine = (strLine, mData) => {
+  const filterData = mData.filter(item => {
+    return item.BEZEICHNUNG === 5;
+  });
+  console.log(filterData);
   return filterData;
 };
