@@ -6,10 +6,9 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import lightBlue from "@material-ui/core/colors/lightBlue";
 import teal from "@material-ui/core/colors/teal";
 import Grid from "@material-ui/core/Grid";
-import Layout from "./components/LandingPage/Layout";
 import { Typography } from "@material-ui/core";
 import StationCardList from "./components/Cards/StationCardList";
-import Sidemenu from "./components/LandingPage/SideMenu";
+import SideMenu from "./components/LandingPage/SideMenu";
 
 const URL = "http://localhost:3001";
 
@@ -46,15 +45,14 @@ class App extends Component {
     return (
       <div>
         <ThemeProvider theme={this.theme}>
-          <Layout />
-          <Grid container spacing={3} style={{ padding: 10 }}>
-            <Grid item xs>
-              <Typography title="h1">News</Typography>
-            </Grid>
+          <SideMenu />
+          <Grid container spacing={2} style={{ padding: 20 }}>
             <Grid item xs>
               <StationCardList masterData={this.state.masterData} />
             </Grid>
-            <Grid item xs></Grid>
+            <Grid item xs>
+              <Typography title="h1">News</Typography>
+            </Grid>
           </Grid>
         </ThemeProvider>
       </div>
