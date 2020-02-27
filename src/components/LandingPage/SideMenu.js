@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SideMenu() {
+export default function SideMenu(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -144,23 +144,25 @@ export default function SideMenu() {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
+          {[
+            ["ptMetro", "Ubahn"],
+            ["ptTram", "Straßenbahn"],
+            ["ptTrainS", "Schnellbahn"],
+            ["ptBusCity", "Bus"],
+            ["ptBusNight", "Nightline"],
+            ["ptBusRegion", "Regionalbus"],
+            ["ptTramVRT", "Was das halt ist"],
+            ["ptTramWLB", "Was das halt ist #2"]
+          ].map((text, index) => (
+            <ListItem
+              button
+              key={text[1]}
+              onClick={() => props.onCategoryClick(text[0])}
+            >
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text[1]} />
             </ListItem>
           ))}
         </List>

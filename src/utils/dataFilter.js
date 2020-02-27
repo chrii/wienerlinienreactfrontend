@@ -13,6 +13,5 @@ export const filterLinesByLine = (strLine, mData) => {
   const filterData = mData.filter(item => {
     return item.BEZEICHNUNG === 5;
   });
-  console.log(filterData);
   return filterData;
 };

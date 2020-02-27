@@ -51,12 +51,7 @@ export default function RecipeReviewCard({ data }) {
 
   return (
     <Box pt={1}>
-      <Card
-        className={classes.root}
-        onClick={event => {
-          console.log(event);
-        }}
-      >
+      <Card className={classes.root}>
         <CardHeader
           avatar={
             <Avatar aria-label="station" className={classes.avatar}>
@@ -105,7 +100,7 @@ export default function RecipeReviewCard({ data }) {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon style={{ color: "green" }} />
+            <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />

@@ -19,7 +19,6 @@ class StationCardList extends Component {
     if (this.getStationsByCategory().length === 0) {
       return <CircularProgress color="secondary" />;
     } else {
-      console.log();
       return this.getStationsByLine(6).map((item, index) => {
         return (
           <StationCard
@@ -32,7 +31,6 @@ class StationCardList extends Component {
   };
 
   render() {
-    console.log(this.getStationsByCategory());
     return (
       <div>
         <Box pl={10} pt={9}>

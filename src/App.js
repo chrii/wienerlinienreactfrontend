@@ -9,12 +9,14 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 import StationCardList from "./components/Cards/StationCardList";
 import SideMenu from "./components/LandingPage/SideMenu";
+import { filterCategorys, filterLinesByLine } from "./utils/dataFilter";
 
 const URL = "http://localhost:3001";
 
 class App extends Component {
   state = {
-    masterData: []
+    masterData: [],
+    activeCategory: []
   };
   componentDidMount() {
     this.getMasterData();
@@ -34,6 +36,14 @@ class App extends Component {
     }
   };
 
+  setActiveCategory = category => {
+    const filtered = filterCategorys(category, "H", this.state.masterData);
+    console.log(filtered);
+    this.setState({
+      activeCategory: filtered
+    });
+  };
+
   theme = createMuiTheme({
     palette: {
       primary: teal,
@@ -45,7 +55,7 @@ class App extends Component {
     return (
       <div>
         <ThemeProvider theme={this.theme}>
-          <SideMenu />
+          <SideMenu onCategoryClick={this.setActiveCategory} />
           <Grid container spacing={2} style={{ padding: 20 }}>
             <Grid item xs>
               <StationCardList masterData={this.state.masterData} />
