@@ -7,9 +7,9 @@ import lightBlue from "@material-ui/core/colors/lightBlue";
 import teal from "@material-ui/core/colors/teal";
 import Grid from "@material-ui/core/Grid";
 import Layout from "./components/LandingPage/Layout";
-import Card from "./components/Cards/StationCard";
 import { Typography } from "@material-ui/core";
-import { filterLines } from "./utils/dataFilter";
+import StationCardList from "./components/Cards/StationCardList";
+import Sidemenu from "./components/LandingPage/SideMenu";
 
 const URL = "http://localhost:3001";
 
@@ -26,7 +26,6 @@ class App extends Component {
       const endpoint = "/masterdata";
       const response = await axios.get(URL + endpoint);
       if (response.status === 200) {
-        console.log(response);
         this.setState({
           masterData: [...response.data]
         });
@@ -38,15 +37,12 @@ class App extends Component {
 
   theme = createMuiTheme({
     palette: {
-      primary: lightBlue,
-      secondary: teal
+      primary: teal,
+      secondary: lightBlue
     }
   });
 
   render() {
-    if (this.state.masterData) {
-      console.log(filterLines("ptMetro", "H", this.state.masterData));
-    }
     return (
       <div>
         <ThemeProvider theme={this.theme}>
@@ -55,8 +51,8 @@ class App extends Component {
             <Grid item xs>
               <Typography title="h1">News</Typography>
             </Grid>
-            <Grid item xs spacing={6}>
-              <Card />
+            <Grid item xs>
+              <StationCardList masterData={this.state.masterData} />
             </Grid>
             <Grid item xs></Grid>
           </Grid>
