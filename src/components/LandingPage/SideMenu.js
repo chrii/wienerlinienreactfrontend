@@ -15,8 +15,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import { DirectionsBus, Tram, Train, Subway } from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -145,23 +144,21 @@ export default function SideMenu(props) {
         <Divider />
         <List>
           {[
-            ["ptMetro", "Ubahn"],
-            ["ptTram", "Straßenbahn"],
-            ["ptTrainS", "Schnellbahn"],
-            ["ptBusCity", "Bus"],
-            ["ptBusNight", "Nightline"],
-            ["ptBusRegion", "Regionalbus"],
-            ["ptTramVRT", "Was das halt ist"],
-            ["ptTramWLB", "Was das halt ist #2"]
-          ].map((text, index) => (
+            ["ptMetro", "Ubahn", <Subway />],
+            ["ptTram", "Straßenbahn", <Tram />],
+            ["ptTrainS", "Schnellbahn", <Train />],
+            ["ptBusCity", "Bus", <DirectionsBus />],
+            ["ptBusNight", "Nightline", <DirectionsBus />],
+            ["ptBusRegion", "Regionalbus", <DirectionsBus />],
+            ["ptTramVRT", "Was das halt ist", <Tram />],
+            ["ptTramWLB", "Was das halt ist #2", <Tram />]
+          ].map(text => (
             <ListItem
               button
               key={text[1]}
               onClick={() => props.onCategoryClick(text[0])}
             >
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <ListItemIcon>{text[2]}</ListItemIcon>
               <ListItemText primary={text[1]} />
             </ListItem>
           ))}

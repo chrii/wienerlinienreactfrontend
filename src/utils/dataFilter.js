@@ -9,9 +9,10 @@ export const filterCategorys = (strLine, way, mData) => {
   return filterData;
 };
 
-export const filterLinesByLine = (strLine, mData) => {
+export const filterCategoryByLine = (strLine, mData) => {
   const filterData = mData.filter(item => {
-    return item.BEZEICHNUNG === 5;
+    return item.BEZEICHNUNG === strLine;
   });
+  console.log(filterData);
   return filterData;
 };

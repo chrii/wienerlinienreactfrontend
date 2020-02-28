@@ -1,30 +1,57 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import { Button, Box, CircularProgress } from "@material-ui/core";
 import StationCard from "./StationCard";
-import { filterCategorys, filterLinesByLine } from "../../utils/dataFilter";
+import { filterCategoryByLine } from "../../utils/dataFilter";
+import DropDownComponent from "./DropDownComponent";
 
 class StationCardList extends Component {
   state = {
-    activeTrafficStations: []
+    stationsByCategory: [],
+    activeLine: [],
+    lineNames: []
   };
-  getStationsByCategory() {
-    return filterCategorys("ptTram", "H", this.props.masterData);
+
+  componentDidUpdate() {
+    if (
+      this.props.categoryData.length !== 0 &&
+      this.state.stationsByCategory.length === 0
+    ) {
+      console.log(this.mapLineNames());
+      this.setState({
+        stationsByCategory: this.props.categoryData,
+        activeLine: filterCategoryByLine(1, this.props.categoryData)
+      });
+    }
   }
 
-  getStationsByLine(line) {
-    return filterLinesByLine(line, this.getStationsByCategory());
-  }
+  setTrafficLine = line => {
+    const filtered = filterCategoryByLine(line, this.state.stationsByCategory);
+    this.setState({
+      activeLine: filtered
+    });
+  };
+
+  mapLineNames = () => {
+    const filterNames = _.chain(this.props.categoryData)
+      .map("BEZEICHNUNG")
+      .uniq()
+      .value();
+    this.setState({
+      lineNames: filterNames
+    });
+  };
 
   onRender = () => {
-    if (this.getStationsByCategory().length === 0) {
-      return <CircularProgress color="secondary" />;
+    console.log(this.state);
+    if (this.state.stationsByCategory.length === 0) {
+      return <CircularProgress disableShrink color="secondary" />;
     } else {
-      return this.getStationsByLine(6).map((item, index) => {
+      return this.state.activeLine.map((item, index) => {
         return (
-          <StationCard
-            key={item.VERKEHRSMITTEL + item.HALTESTELLEN_ID + index}
-            data={item}
-          />
+          <div>
+            <StationCard key={index} data={item} />
+          </div>
         );
       });
     }
@@ -34,6 +61,9 @@ class StationCardList extends Component {
     return (
       <div>
         <Box pl={10} pt={9}>
+          <Box justifyContent="center" alignContent="center">
+            <DropDownComponent names={this.state.lineNames} />
+          </Box>
           {this.onRender()}
         </Box>
       </div>

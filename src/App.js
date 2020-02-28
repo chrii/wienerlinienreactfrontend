@@ -9,7 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 import StationCardList from "./components/Cards/StationCardList";
 import SideMenu from "./components/LandingPage/SideMenu";
-import { filterCategorys, filterLinesByLine } from "./utils/dataFilter";
+import { filterCategorys } from "./utils/dataFilter";
+import _ from "lodash";
 
 const URL = "http://localhost:3001";
 
@@ -20,6 +21,14 @@ class App extends Component {
   };
   componentDidMount() {
     this.getMasterData();
+  }
+  componentDidUpdate() {
+    if (
+      this.state.masterData.length !== 0 &&
+      this.state.activeCategory.length === 0
+    ) {
+      this.setActiveCategory("ptTram");
+    }
   }
 
   getMasterData = async () => {
@@ -38,7 +47,6 @@ class App extends Component {
 
   setActiveCategory = category => {
     const filtered = filterCategorys(category, "H", this.state.masterData);
-    console.log(filtered);
     this.setState({
       activeCategory: filtered
     });
@@ -58,7 +66,7 @@ class App extends Component {
           <SideMenu onCategoryClick={this.setActiveCategory} />
           <Grid container spacing={2} style={{ padding: 20 }}>
             <Grid item xs>
-              <StationCardList masterData={this.state.masterData} />
+              <StationCardList categoryData={this.state.activeCategory} />
             </Grid>
             <Grid item xs>
               <Typography title="h1">News</Typography>
